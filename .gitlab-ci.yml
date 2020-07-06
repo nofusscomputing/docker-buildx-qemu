@@ -27,6 +27,7 @@ variables:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
 
 build:buildx-master:
+  image: docker:dind
   extends: .build
   only: 
     refs:
@@ -42,6 +43,7 @@ build:buildx-master:
     - docker buildx build --platform $CI_BUILDX_ARCHS --progress plain --pull -t "$CI_REGISTRY_IMAGE" --push .
 
 build:buildx:
+  image: docker:dind
   extends: .build
   only:
     variables:
