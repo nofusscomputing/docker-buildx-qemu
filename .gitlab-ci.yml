@@ -1,3 +1,10 @@
+# available variables, do not uncomment all at once.
+# variables:
+#   CI_BUILDX_ARCHS: "linux/amd64,linux/arm64,linux/arm/v7"
+#   CI_BUILD_ARM: true
+#   CI_BUILD_ARM64: true
+#   CI_AMD64_DISABLED: true
+
 
 .build:
   image: docker:dind
@@ -26,7 +33,8 @@
 # these images depend on this repos image
 build:buildx-master:
   extends: .build
-  image: $CI_APPLICATION_REPOSITORY:latest
+  # set the image because we are using buildx here.
+  image: $CI_REGISTRY_IMAGE:latest
   only: 
     refs:
       - master
@@ -42,7 +50,8 @@ build:buildx-master:
 
 build:buildx:
   extends: .build
-  image: $CI_APPLICATION_REPOSITORY:latest
+  # set the image because we are using buildx here.
+  image: $CI_REGISTRY_IMAGE:latest
   only:
     variables:
       - $CI_BUILDX_ARCHS
@@ -104,7 +113,7 @@ build:manifest:
     variables:
       - $CI_BUILDX_ARCHS
   script:
-    - echo "Checking amd86 build..." && [[ -z $CI_AMD64_DISABLE ]] && echo "found" && export CI_MANIFEST_LIST="$CI_APPLICATION_REPOSITORY/amd64:$CI_APPLICATION_TAG"
+    - echo "Checking amd86 build..." && [[ -z $CI_AMD64_DISABLED ]] && echo "found" && export CI_MANIFEST_LIST="$CI_APPLICATION_REPOSITORY/amd64:$CI_APPLICATION_TAG"
     - echo "Checking arm build..." && [[ $CI_BUILD_ARM ]] && echo "found" && export CI_MANIFEST_LIST="$CI_MANIFEST_LIST $CI_APPLICATION_REPOSITORY/arm:$CI_APPLICATION_TAG"
     - echo "Checking arm64 build..." && [[ $CI_BUILD_ARM64 ]] && echo "found" && export CI_MANIFEST_LIST="$CI_MANIFEST_LIST $CI_APPLICATION_REPOSITORY/arm64:$CI_APPLICATION_TAG"
     - export DOCKER_CLI_EXPERIMENTAL=enabled
