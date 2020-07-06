@@ -1,6 +1,7 @@
 variables:
-  CI_BUILD_ARCHS: "linux/amd64,linux/arm64"
+  CI_BUILDX_ARCHS: "linux/amd64"
   CI_BUILD_IMAGE: "registry.gitlab.com/gdunstone/docker-buildx-qemu"
+
 
 .build:
   image: $CI_BUILD_IMAGE
