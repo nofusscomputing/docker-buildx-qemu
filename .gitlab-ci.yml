@@ -1,7 +1,5 @@
 variables:
-  CI_BUILDX_ARCHS: "linux/amd64"
   CI_BUILD_IMAGE: "registry.gitlab.com/gdunstone/docker-buildx-qemu"
-
 
 .build:
   image: $CI_BUILD_IMAGE
@@ -30,7 +28,6 @@ variables:
 
 build:buildx-master:
   extends: .build
-  image: docker:dind
   only: 
     refs:
       - master
@@ -46,7 +43,6 @@ build:buildx-master:
 
 build:buildx:
   extends: .build
-  image: docker:dind
   only:
     variables:
       - $CI_BUILDX_ARCHS
