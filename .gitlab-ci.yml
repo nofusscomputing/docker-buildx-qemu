@@ -1,5 +1,3 @@
-variables:
-  CI_BUILD_IMAGE: "registry.gitlab.com/gdunstone/docker-buildx-qemu"
 
 .build:
   image: docker:dind
@@ -25,10 +23,10 @@ variables:
       fi
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
-
+# these images depend on this repos image
 build:buildx-master:
   extends: .build
-  image: $CI_BUILD_IMAGE
+  image: $CI_APPLICATION_REPOSITORY:latest
   only: 
     refs:
       - master
@@ -44,7 +42,7 @@ build:buildx-master:
 
 build:buildx:
   extends: .build
-  image: $CI_BUILD_IMAGE
+  image: $CI_APPLICATION_REPOSITORY:latest
   only:
     variables:
       - $CI_BUILDX_ARCHS
