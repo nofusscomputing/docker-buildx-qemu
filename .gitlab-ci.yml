@@ -1,6 +1,6 @@
 # available variables, do not uncomment all at once.
 # variables:
-#   CI_BUILDX_ARCHS: "linux/amd64,linux/arm64,linux/arm/v7"
+#   CI_BUILDX_ARCHS: "linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7"
 #   CI_BUILD_ARM: true
 #   CI_BUILD_ARM64: true
 #   CI_AMD64_DISABLED: true
@@ -30,7 +30,8 @@
       fi
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
 
-# these images depend on this repos image
+# these images depend on this repos image 
+# it must exist for for the arch that the gitlab-runner has.
 build:buildx-master:
   extends: .build
   # set the image because we are using buildx here.
