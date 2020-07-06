@@ -2,7 +2,7 @@ variables:
   CI_BUILD_IMAGE: "registry.gitlab.com/gdunstone/docker-buildx-qemu"
 
 .build:
-  image: $CI_BUILD_IMAGE
+  image: docker:dind
   stage: build
   services:
     - name: docker:dind
@@ -26,70 +26,70 @@ variables:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 
-# build:buildx-master:
-#   extends: .build
-#   only: 
-#     refs:
-#       - master
-#     variables:
-#       - $CI_BUILDX_ARCHS
-#   script:
-#     # Use docker-container driver to allow useful features (push/multi-platform)
-#     - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
-#     - docker buildx create --driver docker-container --use
-#     - docker buildx inspect --bootstrap
-#     - docker buildx ls
-#     - docker buildx build --platform $CI_BUILDX_ARCHS --progress plain --pull -t "$CI_REGISTRY_IMAGE" --push .
+build:buildx-master:
+  extends: .build
+  image: $CI_BUILD_IMAGE
+  only: 
+    refs:
+      - master
+    variables:
+      - $CI_BUILDX_ARCHS
+  script:
+    # Use docker-container driver to allow useful features (push/multi-platform)
+    - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
+    - docker buildx create --driver docker-container --use
+    - docker buildx inspect --bootstrap
+    - docker buildx ls
+    - docker buildx build --platform $CI_BUILDX_ARCHS --progress plain --pull -t "$CI_REGISTRY_IMAGE" --push .
 
-# build:buildx:
-#   extends: .build
-#   only:
-#     variables:
-#       - $CI_BUILDX_ARCHS
-#   except:
-#     refs:
-#        - master
-#   script:
-#     - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
-#     - docker buildx create --driver docker-container --use
-#     - docker buildx inspect --bootstrap
-#     - docker buildx ls
-#     - docker buildx build --platform $CI_BUILDX_ARCHS --progress plain --pull -t "$CI_APPLICATION_REPOSITORY:$CI_APPLICATION_TAG" --push .
+build:buildx:
+  extends: .build
+  image: $CI_BUILD_IMAGE
+  only:
+    variables:
+      - $CI_BUILDX_ARCHS
+  except:
+    refs:
+       - master
+  script:
+    - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
+    - docker buildx create --driver docker-container --use
+    - docker buildx inspect --bootstrap
+    - docker buildx ls
+    - docker buildx build --platform $CI_BUILDX_ARCHS --progress plain --pull -t "$CI_APPLICATION_REPOSITORY:$CI_APPLICATION_TAG" --push .
 
-# # disable build:armv7 for now since it seems to have an issue with dind
-# .build:arm:
-#   image: docker:dind
-#   extends: .build
-#   only:
-#     variables:
-#       - $CI_BUILD_ARM
-#   except:
-#     variables:
-#       - $CI_BUILDX_ARCHS
-#   tags:
-#     - arm
-#   script:
-#     - docker build -t "$CI_APPLICATION_REPOSITORY/arm:$CI_APPLICATION_TAG" .
-#     - docker push "$CI_APPLICATION_REPOSITORY/arm:$CI_APPLICATION_TAG"
+# disable build:armv7 for now since it seems to have an issue with dind
+.build:arm:
+  extends: .build
+  only:
+    variables:
+      - $CI_BUILD_ARM
+  except:
+    variables:
+      - $CI_BUILDX_ARCHS
+  tags:
+    - arm
+  script:
+    - docker build -t "$CI_APPLICATION_REPOSITORY/arm:$CI_APPLICATION_TAG" .
+    - docker push "$CI_APPLICATION_REPOSITORY/arm:$CI_APPLICATION_TAG"
 
-# build:arm64:
-#   extends: .build
-#   only:
-#     variables:
-#       - $CI_BUILD_ARM64
-#   except:
-#     variables:
-#       - $CI_BUILDX_ARCHS
-#   tags:
-#     - arm64
+build:arm64:
+  extends: .build
+  only:
+    variables:
+      - $CI_BUILD_ARM64
+  except:
+    variables:
+      - $CI_BUILDX_ARCHS
+  tags:
+    - arm64
 
-#   script:
-#     - docker build -t "$CI_APPLICATION_REPOSITORY/arm64:$CI_APPLICATION_TAG" .
-#     - docker push "$CI_APPLICATION_REPOSITORY/arm64:$CI_APPLICATION_TAG"
+  script:
+    - docker build -t "$CI_APPLICATION_REPOSITORY/arm64:$CI_APPLICATION_TAG" .
+    - docker push "$CI_APPLICATION_REPOSITORY/arm64:$CI_APPLICATION_TAG"
 
 #  builds this by default
 build:amd64:
-  image: docker:dind
   extends: .build
   except:
     variables:
