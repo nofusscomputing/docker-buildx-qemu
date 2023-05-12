@@ -18,7 +18,6 @@
     DOCKER_DRIVER: overlay2
     # See https://github.com/docker-library/docker/pull/166
     DOCKER_TLS_CERTDIR: ""
-  retry: 2
   before_script:
     - |
       if [[ -z "$CI_COMMIT_TAG" ]]; then
