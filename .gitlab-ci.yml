@@ -11,6 +11,8 @@ include:
 variables:
   MY_PROJECT_ID: "45926238"
 
+  GIT_SYNC_URL: "https://$GITHUB_USERNAME_ROBOT:$GITHUB_TOKEN_ROBOT@github.com/NoFussComputing/docker-buildx-qemu.git"
+
   JOB_STOP_CONVENTIONAL_COMMITS: 'disable for testing'
   JOB_STOP_GIT_PUSH_MIRROR: 'disable for testing'
   JOB_STOP_GITLAB_RELEASE: 'disable for testing'
