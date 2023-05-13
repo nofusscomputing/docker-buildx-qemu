@@ -6,8 +6,9 @@ RUN apt-get update && apt-get install -y \
         ca-certificates \
         curl \
         gnupg2 \
-        software-properties-common && \
-    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
+        software-properties-common \
+        python3 \
+        python3-pip || true
     add-apt-repository "deb https://download.docker.com/linux/debian $(lsb_release -cs) stable" && \
     apt-get update && apt-get install -y \
         docker-ce-cli \
