@@ -1,7 +1,7 @@
 FROM debian
-# Install Docker and qemu
-# TODO Use docker stable once it properly supports buildx
-RUN apt-get update && apt-get install -y \
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+  && apt-get update && apt-get install -y \
         apt-transport-https \
         ca-certificates \
         curl \
