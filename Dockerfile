@@ -1,5 +1,13 @@
 FROM debian
 
+
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+  && apt-get update && apt --fix-broken install \
+  && apt install -y libc-bin locales-all
+
+
+
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update && apt-get install -y \
         apt-transport-https \
@@ -25,3 +33,5 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
 # Write version file
 RUN printf "$(docker --version | perl -pe 's/^.*\s(\d+\.\d+\.\d+.*),.*$/$1/')_$(docker buildx version | perl -pe 's/^.*v?(\d+\.\d+\.\d+).*$/$1/')" > /version && \
     cat /version
+
+RUN echo "[DEBUG] why arm64 reports no docker 'which docker'=[$(which docker)]"
