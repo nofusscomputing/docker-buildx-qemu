@@ -2,7 +2,7 @@
 
 include:
   - project: nofusscomputing/projects/gitlab-ci
-    ref: restructure
+    ref: development
     file:
       - .gitlab-ci_common.yaml
       - type/docker-image.gitlab-ci.yaml
