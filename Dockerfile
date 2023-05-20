@@ -1,11 +1,7 @@
-FROM debian
+FROM debian:11.7
 
 
-
-RUN export DEBIAN_FRONTEND=noninteractive \
-  && apt-get update && apt --fix-broken install \
-  && apt install -y libc-bin locales-all
-
+ARG DEBIAN_FRONTEND=noninteractive
 
 
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -17,17 +13,15 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         gnupg2 \
         software-properties-common \
         python3 \
-        python3-pip || true
+        python3-pip
 
 
-# Install Docker and qemu
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     add-apt-repository "deb https://download.docker.com/linux/debian $(lsb_release -cs) stable" && \
     apt-get update && apt-get install -y \
         docker-buildx-plugin \
         docker-ce-cli \
-        binfmt-support \
-        qemu-user-static || true
+        binfmt-support=2.2.1-1+deb11u1
 
 
 # Write version file
