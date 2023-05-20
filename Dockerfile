@@ -21,13 +21,18 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 
 # Install Docker and qemu
+# binfmt-support=2.2.2-2 testing
+# binfmt-support=2.2.1-1+deb11u1 stable
+# qemu-user-static=1:7.2+dfsg-6 testing
+# qemu-user-static=1:5.2+dfsg-11+deb11u2 stable
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     add-apt-repository "deb https://download.docker.com/linux/debian $(lsb_release -cs) stable" && \
+    add-apt-repository "deb http://deb.debian.org/debian testing main" && \
     apt-get update && apt-get install -y \
         docker-buildx-plugin \
         docker-ce-cli \
-        binfmt-support \
-        qemu-user-static || true
+        binfmt-support=2.2.1-1+deb11u1 \
+        qemu-user-static=1:7.2+dfsg-6 || true
 
 
 # Write version file
