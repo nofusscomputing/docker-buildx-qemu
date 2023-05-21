@@ -45,6 +45,23 @@ links:
 
 > This is a fork of https://gitlab.com/gdunstone/docker-buildx-qemu, which appears to be a fork of a fork. anyhow, updates are required. Credit to original and derivitive devs/contributors for getting it to the stage they had!!
 
+This docker image enables building of multi-architecture docker builds. It's designed to run within a CI environment.
+
+To use this image within Gitlab CI/CD Pipelines the following as a minimum is required within your `gitlab-ci.yaml` file, specifically the `before_script` section of your `docker buildx build` job:
+
+``` yaml
+before_script:
+  # see: https://gitlab.com/gitlab-org/gitlab-runner/-/merge_requests/1861 
+  # on why this `docker run` is required. without it multiarch support doesnt work.
+  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+  - update-binfmts --display
+  - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
+  - docker buildx create --driver=docker-container --driver-opt image=moby/buildkit:v0.11.6 --use
+  - docker buildx inspect --bootstrap
+```
+
+When the above is added to the `before_script` section of the docker container build job, Gitlab CI has been initialized for multi-architecture builds.
+
 
 ## Contributing
 All contributions for this project must conducted from [Gitlab](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu).
