@@ -1,3 +1,24 @@
+## 0.2.0 (2023-05-21)
+
+### Bug Fixes
+
+- **qemu**: [698002d9](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/698002d9f48f7ca1f033aeec2fc848646f177e6d) - segfault on arm no longer occurs [ [!4](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/4) ]
+- **docker**: [8ddf6194](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/8ddf6194c41a0f0991d7a66b9730f77c64c99c68) - removed spt for armv7 and i386 [ [!4](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/4) ]
+
+### Continious Integration
+
+- **gitlab-ci**: [692457da](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/692457da01e5efa149ddbe16a3415880e3b60beb) - update to current HEAD [ [!4](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/4) ]
+- [a00cfd60](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/a00cfd60b887a0354638c97608b513f4cdafacd7) - remove qemu from image [ [!4](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/4) ]
+- [06b65d99](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/06b65d9919a6f0007cc347a75de6ab805635a4a9) - update to current gitlab-ci project dev head [ [!17](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/17) [!4](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/4) ]
+
+### Documentaton / Guides
+
+- **readme**: [e49f78f7](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/e49f78f712ea84f7d411e8916b1a7f8b87b26e22) - added usage within gitlab-ci [ [!4](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/4) ]
+
+### Features
+
+- **build**: [d352f0e8](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/d352f0e899d5da43a23ebe25167718f947149cf4) - use debian slim [ [!4](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/4) ]
+
 ## 0.1.0 (2023-05-15)
 
 ### Bug Fixes
