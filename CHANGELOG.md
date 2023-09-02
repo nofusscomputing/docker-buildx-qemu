@@ -1,3 +1,9 @@
+## 0.3.0rc0 (2023-09-02)
+
+### Features
+
+- **ci**: [21952f4c](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/21952f4cf0d08d877ce4bd443024a2de6c0ceb77) - use project gitlab-ci automagic template [ [!6](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/6) [#1](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/issues/1) ]
+
 ## 0.2.0 (2023-05-21)
 
 ### Bug Fixes
