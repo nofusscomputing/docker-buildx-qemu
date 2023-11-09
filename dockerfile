@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM debian:11.7-slim
+FROM --platform=$TARGETPLATFORM debian:11.8-slim
 
 
 ARG DEBIAN_FRONTEND=noninteractive
