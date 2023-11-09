@@ -22,4 +22,4 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
         docker-buildx-plugin \
         docker-ce-cli \
         binfmt-support=2.2.1-1+deb11u1 \
-        qemu-user-static=1:7.2+dfsg-7~bpo11+1
+        qemu-user-static=1:7.2+dfsg-7+deb12u2~bpo11+1
