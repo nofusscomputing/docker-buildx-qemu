@@ -1,3 +1,10 @@
+## 0.3.0 (2023-11-09)
+
+### Features
+
+- **qemu-user-static**: [a068446e](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/a068446e26b9a936e0e26f3095db119cf177f5a1) - updated to ver 1:7.2+dfsg-7+deb12u2~bpo11+1 [ [!28](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/28) ]
+- **build**: [1a4ef6f8](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/commit/1a4ef6f888d16ab2eb62e4c39c6c0125658da004) - update base image to debian:11.8-slim [ [!28](https://gitlab.com/nofusscomputing/projects/docker-buildx-qemu/-/merge_requests/28) ]
+
 ## 0.3.0rc0 (2023-09-02)
 
 ### Features
