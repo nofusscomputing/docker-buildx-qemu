@@ -1,5 +1,12 @@
 FROM --platform=$TARGETPLATFORM debian:11.8-slim
 
+LABEL \
+  org.opencontainers.image.vendor="No Fuss Computing" \
+  org.opencontainers.image.title="BuildX QEMU" \
+  org.opencontainers.image.description="QEMU within docker for cross-platform builds" \
+  org.opencontainers.image.vendor="No Fuss Computing" \
+  io.artifacthub.package.license="MIT"
+
 
 ARG DEBIAN_FRONTEND=noninteractive
 
